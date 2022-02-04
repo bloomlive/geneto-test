@@ -2,43 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChallengeUpdateRequest;
+use App\Http\Resources\ChallengeResource;
 use App\Models\Challenge;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ChallengesController extends Controller
 {
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        //
+        return ChallengeResource::collection(
+            Challenge::query()->paginate(24)
+        );
     }
 
-    public function create()
+    public function store(ChallengeUpdateRequest $request): ChallengeResource
     {
-        //
+        $validated = $request->validated();
+
+        $challenge = Challenge::create($validated);
+
+        return ChallengeResource::make($challenge);
     }
 
-    public function store(Request $request)
+    public function show(Challenge $challenge): ChallengeResource
     {
-        //
+        return ChallengeResource::make($challenge);
     }
 
-    public function show(Challenge $challenge)
+    public function update(ChallengeUpdateRequest $request, Challenge $challenge)
     {
-        //
-    }
+        $validated = $request->validated();
 
-    public function edit(Challenge $challenge)
-    {
-        //
-    }
+        $challenge->fill($validated)->save();
 
-    public function update(Request $request, Challenge $challenge)
-    {
-        //
+        return ChallengeResource::make($challenge);
     }
 
     public function destroy(Challenge $challenge)
     {
-        //
+        $challenge->delete();
+
+        return response()->noContent();
     }
 }
