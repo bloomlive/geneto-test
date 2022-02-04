@@ -13,7 +13,7 @@ class ChallengeUpdateRequest extends FormRequest
         return [
             'start_date'        => ['sometimes', 'date'],
             'end_date'          => ['sometimes', 'date'],
-            'type'              => ['sometimes', new EnumValue(ChallengeType::class)],
+            'type'              => ['sometimes', new EnumValue(ChallengeType::class, false)],
             'image_url'         => ['nullable', 'string', 'url'],
             'is_public'         => ['sometimes', 'boolean'],
             'title'             => ['nullable', 'max:255', 'string'],

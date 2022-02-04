@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChallengeStoreRequest;
 use App\Http\Requests\ChallengeUpdateRequest;
 use App\Http\Resources\ChallengeResource;
 use App\Models\Challenge;
@@ -16,7 +17,7 @@ class ChallengesController extends Controller
         );
     }
 
-    public function store(ChallengeUpdateRequest $request): ChallengeResource
+    public function store(ChallengeStoreRequest $request): ChallengeResource
     {
         $validated = $request->validated();
 

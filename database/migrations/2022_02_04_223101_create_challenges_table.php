@@ -17,8 +17,8 @@ class CreateChallengesTable extends Migration
             $table->boolean('is_public');
             $table->unsignedInteger('type');
             $table->string('image_url', 255)->nullable();
-            $table->string('prize_title');
-            $table->text('prize_description');
+            $table->string('prize_title')->nullable();
+            $table->text('prize_description')->nullable();
             $table->index('start_date');
             $table->index('end_date');
             $table->index('is_public');
